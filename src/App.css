@@ -1,0 +1,80 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+body {
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 150px;
+  background-color: #1e47fa;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  transform: translateX(-180px);
+  transition: transform 0.3s ease-in-out;
+}
+
+.sidebar-item {
+  color: #ffffff;
+  margin-bottom: 30px;
+  text-decoration: none;
+  display: block;
+  padding: 8px 16px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.sidebar-item:hover {
+  color: #ffffff;
+}
+
+.sidebar-toggle {
+  position: fixed;
+  top: 1%;
+  left: 70px;
+  transform: translateY(-50%);
+  background-color: #2b14ff;
+  color: #fff;
+  padding: 8px;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  z-index: 1000;
+  font-size: 18px;
+  font-weight: bold;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.App.sidebar-open {
+  margin-left: 150px;
+}
+
+.toggle-sidebar {
+  width: 200px;
+}
+

@@ -1,0 +1,118 @@
+.AllCases {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.table-container {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  width: 100%;
+  overflow-x: auto;
+  width: 1000px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #000000
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+tr th {
+  font-size: 18px;
+  padding: 12px;
+  border: 1px solid #eeeeee;
+  text-align: left;
+  background-color: rgba(217, 221, 146, 0.2);
+}
+
+tr td {
+  border: 1px solid #eeeeee;
+  text-align: left;
+}
+
+input {
+  font-size: 16px;
+  background-color: transparent;
+  border: none;
+  width: 91%;
+  padding: 12px 12px;
+  font-family: 'Poppins', sans-serif;
+}
+
+input:hover {
+  background-color: #dad8d6;
+}
+
+input:focus {
+  outline: 1px solid #ccc;
+  border: 1px solid #ccc;
+}
+
+.edit-button {
+  padding: 5px 10px;
+  background-color: #1a73e8;
+  color: #ffffff;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-button:hover {
+  background-color: #2a8ff2;
+}
+
+/* Tabs Container */
+.tabs-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.tabs {
+  display: flex;
+  background-color: #f5f5f5;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid #d8d8d8;
+}
+
+.tab {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #555555;
+  border-top: 3px solid transparent;
+  border-bottom: none;
+  cursor: pointer;
+  background-color: #f5f5f5;
+}
+
+.tab:hover {
+  background-color: #e0e0e0;
+}
+
+.tab-selected {
+  border-top: 3px solid #1a73e8;
+  background-color: #ffffff;
+}
+
+.tab-content-container {
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #d8d8d8;
+  padding: 20px;
+}
