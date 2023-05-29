@@ -6,177 +6,180 @@ const AllCases = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filter, setFilter] = useState('');
   const [selectedTab, setSelectedTab] = useState ("All Cases");
-  const [allCasesData, setAllCasesData] = useState([]);
-  const [patientQuestionsData, setPatientQuestionsData] = useState([]);
-  const [researchQuestionData, setResearchQuestionData] = useState([]);
-  const [enchancedData, setEnchancedData] = useState([]);
+  const [patientQuestionData, setPatientQuestionData] = useState([]);
+  const [processedQuestionData, setProcessedQuestionData] = useState([]);
+  const [enhancedData, setEnhancedData] = useState([]);
   const [articlesData, setArticlesData] = useState([]);
   const [patientsData, setPatientsData] = useState([]);
-  const [diseaseData, setDiseaseData] = useState([]);
-  const [questionsData, setQuestionsData] = useState([]);
+  const [questionTypeData, setQuestionTypeData] = useState([]);
   const [treatmentsData, setTreatmentsData] = useState([]);
+  const [diseaseData, setDiseaseData] = useState([]);
+  const [allCasesData, setAllCasesData] = useState([]);
+  const [caseData, setCaseData] = useState(null);
+
 
 
   const tabNames = [
     "All cases",
     "Patient Questions",
     "Questions Processed",
-    "Enchanced",
+    "Enhanced",
     "Articles",
     "Patients",
-    "Disease",
+    "Diseases",
     "Questions",
     "Treatments",
   ];
 
- //FETCH DATA
-  // Patient Questions table
-  const fetchPatientQuestionsData = () => {
-    fetch('http://localhost:5000/api/Case_patient_questions')
-      .then(response => response.json())
-      .then(data => {
-        const dataWithEditState = data.map(item => ({ ...item, isEditing: false }));
-        setPatientQuestionsData(dataWithEditState);
-      })
-      .catch(error => console.error('Error:', error));
+  //FETCH DATA
+// Patient Question table
+
+  const fetchPatientQuestionData = () => {
+    fetch('http://localhost:5000/api/patient_question')
+        .then(response => response.json())
+        .then(data => {
+          const dataWithEditState = data.map(item => ({ ...item, isEditing: false }));
+          setPatientQuestionData(dataWithEditState);
+        })
+        .catch(error => console.error('Error:', error));
   };
+
 
   // All cases table
-  const fetchAllCasesData = () => {
-    fetch('http://localhost:5000/api/All_Cases') // replace with your "All cases" endpoint
-      .then(response => response.json())
-      .then(data => {
-        const dataWithEditState = data.map(item => ({ ...item, isEditing: false }));
-        setAllCasesData(dataWithEditState);
-      })
-      .catch(error => console.error('Error:', error));
+  const fetchCaseData = (caseId) => {
+    fetch(`http://localhost:5000/api/cases/${caseId}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(data => {
+          setCaseData(data);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+  };
+// Processed Question table
+  const fetchProcessedQuestionData = () => {
+    fetch('http://localhost:5000/api/processed_question')
+        .then(response => response.json())
+        .then(data => {
+          const dataWithEditState = data.map(item => ({ ...item, isEditing: false }));
+          setProcessedQuestionData(dataWithEditState);
+        })
+        .catch(error => console.error('Error:', error));
   };
 
-
-  // Questions Processed table
-  const fetchResearchQuestionData = () => {
-    fetch('http://localhost:5000/api/Research_Question_Processed')
-      .then(response => response.json())
-      .then(data => {
-        const dataWithEditState = data.map(item => ({ ...item, isEditing: false }));
-        setResearchQuestionData(dataWithEditState);
-      })
-      .catch(error => console.error('Error:', error));
+// Enhanced table
+  const fetchEnhancedData = () => {
+    fetch('http://localhost:5000/api/enhanced')
+        .then(response => response.json())
+        .then(data => {
+          const dataWithEditState = data.map(item => ({ ...item, isEditing: false }));
+          setEnhancedData(dataWithEditState);
+        })
+        .catch(error => console.error('Error:', error));
   };
 
-  // Enchanced table
-  const fetchEnchancedData = () => {
-    fetch('http://localhost:5000/api/enchanced')
-      .then(response => response.json())
-      .then(data => {
-        const dataWithEditState = data.map(item => ({ ...item, isEditing: false }));
-        setEnchancedData(dataWithEditState);
-      })
-      .catch(error => console.error('Error:', error));
-  };
-  
-  // Articles table
+// Articles table
   const fetchArticlesData = () => {
     fetch('http://localhost:5000/api/articles')
-      .then(response => response.json())
-      .then(data => {
-        const dataWithEditState = data.map(item => ({ ...item, isEditing: false }));
-        setArticlesData(dataWithEditState);
-      })
-      .catch(error => console.error('Error:', error));
+        .then(response => response.json())
+        .then(data => {
+          const dataWithEditState = data.map(item => ({ ...item, isEditing: false }));
+          setArticlesData(dataWithEditState);
+        })
+        .catch(error => console.error('Error:', error));
   };
 
-    
-  // Patients table
+// Patients table
   const fetchPatientsData = () => {
-    fetch('http://localhost:5000/api/patients')
-      .then(response => response.json())
-      .then(data => {
-        const dataWithEditState = data.map(item => ({ ...item, isEditing: false }));
-        setPatientsData(dataWithEditState);
-      })
-      .catch(error => console.error('Error:', error));
+    fetch('http://localhost:5000/api/patient')
+        .then(response => response.json())
+        .then(data => {
+          const dataWithEditState = data.map(item => ({ ...item, isEditing: false }));
+          setPatientsData(dataWithEditState);
+        })
+        .catch(error => console.error('Error:', error));
   };
 
-      
-  // Disease table
+// Question Type table
+  const fetchQuestionTypeData = () => {
+    fetch('http://localhost:5000/api/question_type')
+        .then(response => response.json())
+        .then(data => {
+          const dataWithEditState = data.map(item => ({ ...item, isEditing: false }));
+          setQuestionTypeData(dataWithEditState);
+        })
+        .catch(error => console.error('Error:', error));
+  };
+
+// Treatments table
+  const fetchTreatmentsData = () => {
+    fetch('http://localhost:5000/api/treatment')
+        .then(response => response.json())
+        .then(data => {
+          const dataWithEditState = data.map(item => ({ ...item, isEditing: false }));
+          setTreatmentsData(dataWithEditState);
+        })
+        .catch(error => console.error('Error:', error));
+  };
+
+// Disease table
   const fetchDiseaseData = () => {
     fetch('http://localhost:5000/api/disease')
-      .then(response => response.json())
-      .then(data => {
-        const dataWithEditState = data.map(item => ({ ...item, isEditing: false }));
-        setDiseaseData(dataWithEditState);
-      })
-      .catch(error => console.error('Error:', error));
+        .then(response => response.json())
+        .then(data => {
+          const dataWithEditState = data.map(item => ({ ...item, isEditing: false }));
+          setDiseaseData(dataWithEditState);
+        })
+        .catch(error => console.error('Error:', error));
   };
 
-        
-  // Questions table
-  const fetchQuestionsData = () => {
-    fetch('http://localhost:5000/api/questions')
-      .then(response => response.json())
-      .then(data => {
-        const dataWithEditState = data.map(item => ({ ...item, isEditing: false }));
-        setQuestionsData(dataWithEditState);
-      })
-      .catch(error => console.error('Error:', error));
-  };
-
-          
-  // Treatments table
-  const fetchTreatmentsData = () => {
-    fetch('http://localhost:5000/api/treatments')
-      .then(response => response.json())
-      .then(data => {
-        const dataWithEditState = data.map(item => ({ ...item, isEditing: false }));
-        setTreatmentsData(dataWithEditState);
-      })
-      .catch(error => console.error('Error:', error));
-  };
 
 
 
   const handleTabClick = (tab) => {
     setSelectedTab(tab);
-  
-    switch (tab) {
 
+    switch (tab) {
       case "All cases":
-        fetchAllCasesData();
+        fetchCaseData();
         break;
 
       case "Patient Questions":
-        fetchPatientQuestionsData();
+        fetchPatientQuestionData();
         break;
 
       case "Questions Processed":
-        fetchResearchQuestionData();
+        fetchProcessedQuestionData();
         break;
 
-      case "Enchanced":
-        fetchEnchancedData();
+      case "Enhanced":
+        fetchEnhancedData();
         break;
 
       case "Articles":
         fetchArticlesData();
         break;
-        
+
       case "Patients":
         fetchPatientsData();
         break;
-        
-      case "Disease":
+
+      case "Diseases":
         fetchDiseaseData();
         break;
-        
-      case "Questions":
-        fetchQuestionsData();
+
+      case "Question Types":
+        fetchQuestionTypeData();
         break;
-   
+
       case "Treatments":
         fetchTreatmentsData();
         break;
-
 
       default:
         break;
@@ -191,15 +194,15 @@ const AllCases = () => {
       break;
 
     case "Patient Questions":
-      currentData = patientQuestionsData;
+      currentData = patientQuestionData;
       break;
 
     case "Questions Processed":
-      currentData = researchQuestionData;
+      currentData = processedQuestionData;
       break;
       
-    case "Enchanced":
-      currentData = enchancedData;
+    case "Enhanced":
+      currentData = enhancedData;
       break;
 
       
@@ -219,7 +222,7 @@ const AllCases = () => {
 
       
     case "Questions":
-      currentData = questionsData;
+      currentData = questionTypeData;
       break;
 
             
@@ -246,13 +249,13 @@ const AllCases = () => {
         setAllCasesData(updatedData);
         break;
       case "Patient Questions":
-        updatedData = patientQuestionsData.map((item) => {
+        updatedData = patientQuestionData.map((item) => {
           if (item.ID === id) { 
             return {...item, isEditing: !item.isEditing };
           }
           return item;
         });
-        setPatientQuestionsData(updatedData);
+        setPatientQuestionData(updatedData);
         break;
       // more tables here in future
       default:
@@ -292,31 +295,56 @@ const AllCases = () => {
 
       <div className="tab-content-container">
         {selectedTab === "All cases" && (
-          <div className="all-cases tab-content">
-            <div className="search-container">
-              <input
-                type="text"
-                placeholder="Search cases..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-            </div>
-            <div className="filter-container">
-              <label htmlFor="filter">Filter by status:</label>
-              <select
-                id="filter"
-                value={filter}
-                onChange={(e) => setFilter(e.target.value)}
-              >
-                <option value="">All</option>
-                <option value="Open">Open</option>
-                <option value="Closed">Closed</option>
-              </select>
-            </div>
-              <div className="table-container">
-              <Table filteredData={filteredData} toggleEdit={toggleEdit} />
+            <div className="all-cases tab-content">
+              <div className="search-container">
+                <input
+                    type="text"
+                    placeholder="Search cases..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
+                <button onClick={() => fetchCaseData(searchTerm)}>
+                  Show me case
+                </button>
               </div>
-          </div>
+              <div className="filter-container">
+                <label htmlFor="filter">Filter by status:</label>
+                <select
+                    id="filter"
+                    value={filter}
+                    onChange={(e) => setFilter(e.target.value)}
+                >
+                  <option value="">All</option>
+                  <option value="Open">Open</option>
+                  <option value="Closed">Closed</option>
+                </select>
+              </div>
+
+              {caseData && (
+                  <div className="case-data">
+                    <table>
+                      <thead>
+                      <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      {Object.entries(caseData).map(([key, value], index) => (
+                          <tr key={index}>
+                            <td>{key}</td>
+                            <td>{value.toString()}</td>
+                          </tr>
+                      ))}
+                      </tbody>
+                    </table>
+                  </div>
+              )}
+
+              <div className="table-container">
+                <Table filteredData={filteredData} toggleEdit={toggleEdit} />
+              </div>
+            </div>
         )}
 
         {selectedTab === "Patient Questions" && (
@@ -375,7 +403,7 @@ const AllCases = () => {
         )}
 
 
-        {selectedTab === "Enchanced" && (
+        {selectedTab === "Enhanced" && (
           <div className="enchanced tab-content">
             <div className="search-container">
               <input
@@ -541,9 +569,6 @@ const AllCases = () => {
             </div>
           </div>
         )}
-
-
-
     </div>
   </div>
  );
